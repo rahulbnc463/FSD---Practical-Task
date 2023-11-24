@@ -12,6 +12,9 @@ body {
 .btn {
   margin-left: 0.5em;
 }
+.divbtn {
+  float: left;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

@@ -1,8 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const BlogListing = () => {
   const [blogData, setBlogData] = useState(null);
+  const navigate = useNavigate();
+
+  // ...........................3 major Function for EDIT, REMOVE & DETAILS
+  const handleEdit = (id) => {};
+
+  const handleRemove = (id) => {};
+
+  const handleDetails = (id) => {
+    navigate("/blog/detail/" + id);
+  };
 
   useEffect(() => {
     fetch("http://localhost:8000/blogs")
@@ -23,8 +33,10 @@ const BlogListing = () => {
           <h2>Blog Listing</h2>
         </div>
         <div className="card-body">
-          <div>
-            <Link className="btn btn-success">Add More Blogs (+)</Link>
+          <div className="divbtn">
+            <Link to="/blog/create" className="btn btn-success">
+              Add More Blogs (+)
+            </Link>
           </div>
           <table className="table table-bordered">
             <thead>
@@ -55,9 +67,30 @@ const BlogListing = () => {
                       />
                     </td>
                     <td>
-                      <a className="btn btn-success">Edit</a>
-                      <a className="btn btn-danger">Remove</a>
-                      <a className="btn btn-primary">Details</a>
+                      <a
+                        onClick={() => {
+                          handleEdit(item.id);
+                        }}
+                        className="btn btn-success"
+                      >
+                        Edit
+                      </a>
+                      <a
+                        onClick={() => {
+                          handleRemove(item.id);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        Remove
+                      </a>
+                      <a
+                        onClick={() => {
+                          handleDetails(item.id);
+                        }}
+                        className="btn btn-primary"
+                      >
+                        Details
+                      </a>
                     </td>
                   </tr>
                 ))}
