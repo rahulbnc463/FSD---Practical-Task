@@ -6,9 +6,25 @@ const BlogListing = () => {
   const navigate = useNavigate();
 
   // ...........................3 major Function for EDIT, REMOVE & DETAILS
-  const handleEdit = (id) => {};
+  const handleEdit = (id) => {
+    navigate("/blog/edit/" + id);
+  };
 
-  const handleRemove = (id) => {};
+  const handleRemove = (id) => {
+    if (window.confirm("Do you want to remove?")) {
+      // .............fetch all data to JSON
+      fetch("http://localhost:8000/blogs/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => {
+          alert("Removed Successfully.");
+          window.location.reload();
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+  };
 
   const handleDetails = (id) => {
     navigate("/blog/detail/" + id);
@@ -28,16 +44,21 @@ const BlogListing = () => {
   }, []);
   return (
     <div className="container">
-      <div className="card">
+      <div
+        className="card"
+        style={{
+          boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+        }}
+      >
         <div className="card-title">
           <h2>Blog Listing</h2>
         </div>
-        <div className="card-body">
-          <div className="divbtn">
-            <Link to="/blog/create" className="btn btn-success">
-              Add More Blogs (+)
-            </Link>
-          </div>
+        <div
+          className="card-body"
+          style={{
+            boxShadow: " rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+          }}
+        >
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -56,7 +77,7 @@ const BlogListing = () => {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.title}</td>
-                    <td>{item.username}</td>
+                    <td>{item.userName}</td>
                     <td>{item.date}</td>
                     <td>{item.description}</td>
                     <td>
@@ -68,6 +89,7 @@ const BlogListing = () => {
                     </td>
                     <td>
                       <a
+                        href="#"
                         onClick={() => {
                           handleEdit(item.id);
                         }}
@@ -96,6 +118,11 @@ const BlogListing = () => {
                 ))}
             </tbody>
           </table>
+          <div className="divbtn">
+            <Link to="/blog/create" className="btn btn-success">
+              Add More Blogs (+)
+            </Link>
+          </div>
         </div>
       </div>
     </div>

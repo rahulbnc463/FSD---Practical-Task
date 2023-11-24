@@ -9,7 +9,6 @@ const CreateBlog = () => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [active, setActive] = useState(true);
-  const [validation, setValidation] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -72,15 +71,9 @@ const CreateBlog = () => {
                       <input
                         required
                         value={userName}
-                        onMouseDown={(e) => setValidation(true)}
                         onChange={(e) => setUserName(e.target.value)}
                         className="form-control"
                       ></input>
-                      {userName.length == 0 && validation && (
-                        <span className="text-danger">
-                          You have to input UserName
-                        </span>
-                      )}
                     </div>
                   </div>
                   {/* ..................For Date  */}
